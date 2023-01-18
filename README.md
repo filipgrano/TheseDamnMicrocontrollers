@@ -1,5 +1,5 @@
 # TheseDamnMicrocontrollers
-Trying to learn these Damn Computer and Microcontroller things
+Trying to learn these Damn Computers and Microcontroller things
 
 Microcontroller: Arduino Nano (Cheap chinese with USBC) 
 2 x Dallas oneWire Temperature sensors

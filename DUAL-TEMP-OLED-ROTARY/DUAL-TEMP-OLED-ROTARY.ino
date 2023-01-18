@@ -23,8 +23,8 @@ float TempA =0; //global variable for storing temp reading
 float TempB = 0; //global variable for storing temp reading
 
 // Rotary Encoder Inputs
-#define CLK 4   //rotary encoder pin D4
-#define DT 3    //rotary encoder pin D3
+#define CLK 3   //rotary encoder pin D4
+#define DT 4    //rotary encoder pin D3
 #define SW 5   ////rotary encoder pushbutton pin D5
 int counter = 0;
 int currentStateCLK;
@@ -86,7 +86,8 @@ void loop() {
       display.setCursor(60, 40);     // Start at top-x corner
    display.print(lastButtonPress);
 
- display.display(); //print the things on the display
+ display.display(); //print the things on the display'
+ delay(1);
 }
 
 
@@ -106,22 +107,19 @@ void GetInput(){
 
   // If last and current state of CLK are different, then pulse occurred
   // React to only 1 state change to avoid double count
-  if (currentStateCLK != lastStateCLK  && currentStateCLK == 1){
+  if (currentStateCLK != lastStateCLK){
 
     // If the DT state is different than the CLK state then
     // the encoder is rotating CCW so decrement
     if (digitalRead(DT) != currentStateCLK) {
-      counter --;
-      currentDir ="CCW";
-    } else {
-      // Encoder is rotating CW so increment
       counter ++;
       currentDir ="CW";
+    } else {
+      // Encoder is rotating CW so increment
+      counter --;
+      currentDir ="CCW";
     }
-
-
   }
-
   // Remember last CLK state
   lastStateCLK = currentStateCLK;
 
@@ -144,5 +142,47 @@ void GetInput(){
   //delay(1);
 }
 
+
+// void GetInput(){
+// //monitors the encoder for user input
+//  // Read the current state of CLK
+//   currentStateCLK = digitalRead(CLK);
+
+//   // If last and current state of CLK are different, then pulse occurred
+//   // React to only 1 state change to avoid double count
+//   if (currentStateCLK != lastStateCLK  && currentStateCLK == 1){
+
+//     // If the DT state is different than the CLK state then
+//     // the encoder is rotating CCW so decrement
+//     if (digitalRead(DT) != currentStateCLK) {
+//       counter --;
+//       currentDir ="CCW";
+//     } else {
+//       // Encoder is rotating CW so increment
+//       counter ++;
+//       currentDir ="CW";
+//     }
+//   }
+//   // Remember last CLK state
+//   lastStateCLK = currentStateCLK;
+
+//   // Read the button state
+//   int btnState = digitalRead(SW);
+
+//   //If we detect LOW signal, button is pressed
+//   if (btnState == LOW) {
+//     //if 50ms have passed since last LOW pulse, it means that the
+//     //button has been pressed, released and pressed again
+//     if (millis() - lastButtonPress > 50) {
+//       Serial.println("Button pressed!");
+//     }
+
+//     // Remember last button press event
+//     lastButtonPress = millis();
+//   }
+
+//   // Put in a slight delay to help debounce the reading
+//   //delay(1);
+// }
 
 

@@ -77,14 +77,16 @@ void loop() {
     display.setCursor(0, 20);     // Start at top-x corner
     display.print("B: ");
     display.print(TempB);
+    display.setCursor(0, 40);     // Start at top-x corner
+    display.print("Delta: ");
+    display.print(TempA-TempB);
 
 // testing rotary encoder 
-   display.setCursor(0, 40);     // Start at top-x corner
+   display.setCursor(0, 55);     // Start at top-x corner
    display.print(currentDir);
-   display.setCursor(30, 40);     // Start at top-x corner
+   display.setCursor(30, 55);     // Start at top-x corner
    display.print(counter);
-      display.setCursor(60, 40);     // Start at top-x corner
-   display.print(lastButtonPress);
+
 
  display.display(); //print the things on the display'
  delay(1);

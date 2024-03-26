@@ -82,6 +82,21 @@ void setup() {
   PcInt::attachInterrupt(SW, GetInput, CHANGE);
 }
 
+void printTimeAndTempsAsCSV() {
+  unsigned long timeNow = millis();
+  unsigned long seconds = timeNow / 1000;
+  unsigned int milliseconds = timeNow % 1000;
+
+  // Print in CSV format: Time (s.ms), TempA, TempB
+  Serial.print(seconds);
+  Serial.print(".");
+  Serial.print(milliseconds);
+  Serial.print(",");
+  Serial.print(TempA);
+  Serial.print(",");
+  Serial.println(TempB);
+}
+
 void loop() {
   display.setTextSize(1);               // Normal 1:1 pixel scale
   display.setTextColor(SSD1306_WHITE);  // Draw white text
@@ -91,6 +106,8 @@ void loop() {
 
 
   GetTemp();  // request temperature reading
+
+  printTimeAndTempsAsCSV();
 
   display.setCursor(0, 0);  // Start at top-x corner
   display.print(F("A: "));
